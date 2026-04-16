@@ -45,4 +45,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  button, a, [role="button"] {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
 }

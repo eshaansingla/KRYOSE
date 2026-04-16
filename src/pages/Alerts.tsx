@@ -9,6 +9,13 @@ import { cn } from '../utils/cn';
 export function Alerts() {
   const [filter, setFilter] = useState<'all' | 'active' | 'resolved'>('all');
 
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = () => {
+    setIsExporting(true);
+    setTimeout(() => setIsExporting(false), 1500); // Simulate export
+  };
+
   const filteredAlerts = MOCK_ALERTS.filter(alert => {
     if (filter === 'all') return true;
     return alert.status === filter;
@@ -25,8 +32,8 @@ export function Alerts() {
         </div>
         
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="text-xs font-bold tracking-wider uppercase flex items-center gap-2">
-            <Download className="h-4 w-4" /> Export CSV
+          <Button variant="outline" className="text-xs font-bold tracking-wider uppercase flex items-center gap-2" onClick={handleExport} disabled={isExporting}>
+            <Download className={cn("h-4 w-4", isExporting && "animate-bounce")} /> {isExporting ? 'Exporting...' : 'Export CSV'}
           </Button>
         </div>
       </div>
