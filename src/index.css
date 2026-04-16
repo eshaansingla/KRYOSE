@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--app-primary);
+  --color-secondary: var(--app-secondary);
+  --color-background: var(--app-background);
+  --color-surface: var(--app-surface);
+  --color-content: var(--app-text-primary);
+  --color-content-muted: var(--app-text-secondary);
+  --color-success: var(--app-success);
+  --color-warning: var(--app-warning);
+  --color-error: var(--app-error);
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --app-primary: #2C46EA;
+    --app-secondary: #E68325;
+    --app-background: #F8FAFC;
+    --app-surface: #FFFFFF;
+    --app-text-primary: #0F172A;
+    --app-text-secondary: #64748B;
+    --app-success: #16A34A;
+    --app-warning: #E68325;
+    --app-error: #DC2626;
+  }
+  
+  .dark {
+    --app-primary: #2C46EA;
+    --app-secondary: #E68325;
+    --app-background: #0B1220;
+    --app-surface: #111827;
+    --app-text-primary: #E5E7EB;
+    --app-text-secondary: #7060A8;
+    --app-success: #22C55E;
+    --app-warning: #E68325;
+    --app-error: #EF4444;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-content);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
