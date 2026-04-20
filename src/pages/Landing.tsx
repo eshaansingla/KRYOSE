@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Box, Check, History } from 'lucide-react';
+import { ArrowRight, Box, Check, History, Cpu, Thermometer, Droplets } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 export function Landing() {
   return (
     <div className="flex flex-col min-h-full bg-background selection:bg-[#2C46EA]/20">
+
       {/* Hero Section */}
       <section className="relative pt-24 pb-32 overflow-hidden border-b border-surface">
         <div className="absolute inset-0 bg-[#2C46EA]/5 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
@@ -19,7 +20,7 @@ export function Landing() {
                 <span className="text-[10px] font-bold uppercase tracking-widest">Enterprise Hardware + Dashboard Deployment</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-content mb-6 leading-[1.1]">
-                Cold Intelligence.<br/>
+                Cold Intelligence.<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E68325] via-[#7060A8] to-[#2C46EA]">
                   Zero Loss.
                 </span>
@@ -35,42 +36,36 @@ export function Landing() {
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link to="/#hardware">
+                <Link to="/login">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto border-surface text-content-muted hover:text-content">
-                    View Hardware Specs
+                    Schedule a Demo
                   </Button>
                 </Link>
               </div>
             </div>
 
-            {/* The Industry Problem Block */}
+            {/* Industry Problem Block */}
             <div className="bg-surface/50 border border-surface rounded-2xl p-8 shadow-sm">
               <h3 className="text-lg font-bold text-content mb-6 flex items-center gap-2">
-                <History className="h-5 w-5 text-[#E68325]"/>
+                <History className="h-5 w-5 text-[#E68325]" />
                 Root Causes of 40% Food Wastage
               </h3>
               <div className="space-y-5">
-                <div>
-                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider mb-2 text-content-muted">
-                    <span>Equipment Malfunction</span>
-                    <span>35%</span>
+                {[
+                  { label: 'Equipment Malfunction', pct: 35, color: '#2C46EA' },
+                  { label: 'Power Outages',          pct: 28, color: '#E68325' },
+                  { label: 'Thermal Fluctuations',   pct: 18, color: '#7060A8' },
+                ].map(item => (
+                  <div key={item.label}>
+                    <div className="flex justify-between text-xs font-bold uppercase tracking-wider mb-2 text-content-muted">
+                      <span>{item.label}</span>
+                      <span>{item.pct}%</span>
+                    </div>
+                    <div className="w-full bg-background rounded-full h-2 overflow-hidden border border-surface">
+                      <div className="h-2 rounded-full" style={{ width: `${item.pct}%`, backgroundColor: item.color }} />
+                    </div>
                   </div>
-                  <div className="w-full bg-background rounded-full h-2 overflow-hidden border border-surface"><div className="bg-[#2C46EA] h-2 rounded-full" style={{ width: '35%' }}></div></div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider mb-2 text-content-muted">
-                    <span>Power Outages</span>
-                    <span>28%</span>
-                  </div>
-                  <div className="w-full bg-background rounded-full h-2 overflow-hidden border border-surface"><div className="bg-[#E68325] h-2 rounded-full" style={{ width: '28%' }}></div></div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider mb-2 text-content-muted">
-                    <span>Thermal Fluctuations</span>
-                    <span>18%</span>
-                  </div>
-                  <div className="w-full bg-background rounded-full h-2 overflow-hidden border border-surface"><div className="bg-[#7060A8] h-2 rounded-full" style={{ width: '18%' }}></div></div>
-                </div>
+                ))}
                 <div className="flex justify-between mt-4 border-t border-surface pt-4 text-xs font-bold text-content-muted">
                   <span>Additional: Doors (12%), Monitoring Gaps (7%)</span>
                 </div>
@@ -80,38 +75,119 @@ export function Landing() {
         </div>
       </section>
 
-      {/* Measurable Impact Banner */}
+      {/* Metrics Banner */}
       <section className="border-b border-surface bg-primary/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-surface">
-            <div className="flex flex-col text-center pt-4 md:pt-0">
-              <span className="text-4xl font-bold text-content tracking-tight">10–25%</span>
-              <span className="text-xs text-content-muted mt-2 uppercase tracking-widest font-bold">Spoilage Reduction</span>
-            </div>
-            <div className="flex flex-col text-center pt-4 md:pt-0">
-              <span className="text-4xl font-bold text-[#E68325] tracking-tight">&lt; 5 mins</span>
-              <span className="text-xs text-content-muted mt-2 uppercase tracking-widest font-bold">Alert Execution</span>
-            </div>
-            <div className="flex flex-col text-center pt-4 md:pt-0">
-              <span className="text-4xl font-bold text-[#2C46EA] tracking-tight">8–14 mo</span>
-              <span className="text-xs text-content-muted mt-2 uppercase tracking-widest font-bold">Unit Payback Period</span>
-            </div>
-            <div className="flex flex-col text-center pt-4 md:pt-0">
-              <span className="text-4xl font-bold text-content tracking-tight">1–2 Day</span>
-              <span className="text-xs text-content-muted mt-2 uppercase tracking-widest font-bold">Deployment Timeline</span>
-            </div>
+            {[
+              { value: '10–25%', label: 'Spoilage Reduction',   color: 'text-content' },
+              { value: '< 5 mins', label: 'Alert Execution',    color: 'text-[#E68325]' },
+              { value: '8–14 mo', label: 'Unit Payback Period', color: 'text-[#2C46EA]' },
+              { value: '1–2 Day', label: 'Deployment Timeline', color: 'text-content' },
+            ].map(stat => (
+              <div key={stat.label} className="flex flex-col text-center pt-4 md:pt-0">
+                <span className={`text-4xl font-bold tracking-tight ${stat.color}`}>{stat.value}</span>
+                <span className="text-xs text-content-muted mt-2 uppercase tracking-widest font-bold">{stat.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing / Value Prop */}
+      {/* Hardware Specs Section */}
+      <section id="hardware" className="py-24 border-b border-surface bg-surface/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-content mb-4 tracking-tight">
+              Industrial-Grade Sensor Hardware
+            </h2>
+            <p className="text-content-muted text-sm font-medium">
+              Every deployment uses production-hardened sensor nodes with redundant communication paths and tamper-evident housings — built for the extremes of cold storage.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: Thermometer,
+                color: '#2C46EA',
+                name: 'PT100 RTD Sensor',
+                badge: 'Pharma Grade',
+                specs: [
+                  'Range: −200°C to +850°C',
+                  'Accuracy: ±0.1°C',
+                  'Response time: 2.5s',
+                  'IP67 rated housing',
+                  '4-wire Wheatstone bridge',
+                ],
+                useCase: 'Pharmaceutical cold rooms, vaccine storage, precision dairy operations requiring regulatory compliance.',
+              },
+              {
+                icon: Cpu,
+                color: '#E68325',
+                name: 'DS18B20 Digital Sensor',
+                badge: 'Standard Tier',
+                specs: [
+                  'Range: −55°C to +125°C',
+                  'Accuracy: ±0.5°C',
+                  '1-Wire protocol (parasitic)',
+                  'Multiple on single bus',
+                  '9–12 bit resolution',
+                ],
+                useCase: 'General cold storage, logistics hubs, multi-zone warehouses requiring cost-effective broad coverage.',
+              },
+              {
+                icon: Droplets,
+                color: '#7060A8',
+                name: 'DHT22 Temp & Humidity',
+                badge: 'Humidity Monitoring',
+                specs: [
+                  'Temp range: −40°C to +80°C',
+                  'Humidity: 0–100% RH',
+                  'Humidity accuracy: ±2% RH',
+                  'Dual-output single wire',
+                  '2.5s sampling rate',
+                ],
+                useCase: 'Loading bays, produce storage, and environments requiring simultaneous temperature and humidity surveillance.',
+              },
+            ].map(hw => (
+              <div key={hw.name} className="flex flex-col border border-surface bg-background rounded-xl p-8 hover:border-content-muted/30 transition-colors shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: `${hw.color}18` }}>
+                    <hw.icon className="h-6 w-6" style={{ color: hw.color }} />
+                  </div>
+                  <span className="text-[10px] font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted uppercase tracking-wider">
+                    {hw.badge}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-content mb-4">{hw.name}</h3>
+                <ul className="space-y-2 mb-6 flex-1">
+                  {hw.specs.map(spec => (
+                    <li key={spec} className="flex items-center gap-2 text-xs font-semibold text-content-muted">
+                      <Check className="h-3.5 w-3.5 shrink-0" style={{ color: hw.color }} />
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-content-muted border-t border-surface pt-4 leading-relaxed font-medium">
+                  {hw.useCase}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-content mb-4 tracking-tight">Operational Hardware Subscriptions</h2>
-            <p className="text-content-muted text-sm font-medium">Standard unit economics require ₹40k–₹80k per warehouse hardware/installation capital setup. Hardware is available on an upfront sale or leased amortized model depending on compliance ceilings.</p>
+            <p className="text-content-muted text-sm font-medium">
+              Standard unit economics require ₹40k–₹80k per warehouse hardware/installation capital setup. Hardware is available on an upfront sale or leased amortized model depending on compliance ceilings.
+            </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+
             {/* Tier 3: Pilot */}
             <div className="flex flex-col border border-surface bg-surface/30 rounded-lg p-8 hover:border-content-muted/30 transition-colors">
               <div className="flex items-center justify-between mb-4">
@@ -119,16 +195,21 @@ export function Landing() {
                 <span className="text-xs font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted">Tier 3</span>
               </div>
               <p className="text-sm font-medium text-content-muted mb-6 h-10">4-6 sensors evaluating baseline thermal footprints in single facilities.</p>
-              <div className="mb-6"><span className="text-4xl font-bold tracking-tight">₹3K–₹5K</span><span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span></div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold tracking-tight">₹3K–₹5K</span>
+                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span>
+              </div>
               <ul className="space-y-4 mb-8 text-xs font-semibold text-content-muted uppercase tracking-wider flex-1">
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Standard DS18B20 / DHT22</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Single-zone tracking</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Setup Fee: ₹5k - ₹8k</li>
               </ul>
-              <Link to="/login"><Button variant="outline" className="w-full text-xs uppercase tracking-widest font-bold">Initiate Pilot Phase</Button></Link>
+              <Link to="/login">
+                <Button variant="outline" className="w-full text-xs uppercase tracking-widest font-bold">Initiate Pilot Phase</Button>
+              </Link>
             </div>
-            
-            {/* Tier 2: Standard */}
+
+            {/* Tier 2: Standard — highlighted */}
             <div className="flex flex-col border-2 border-[#2C46EA] bg-background rounded-lg p-8 relative shadow-2xl shadow-[#2C46EA]/10 transform lg:-translate-y-4">
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#2C46EA] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                 Targeted Scale
@@ -138,32 +219,42 @@ export function Landing() {
                 <span className="text-[10px] font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted">Tier 2</span>
               </div>
               <p className="text-sm font-medium text-content-muted mb-6 h-10">Mid-size facilities requiring holistic environmental + power oversight.</p>
-              <div className="mb-6"><span className="text-4xl font-bold tracking-tight">₹6K–₹10K</span><span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span></div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold tracking-tight">₹6K–₹10K</span>
+                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span>
+              </div>
               <ul className="space-y-4 mb-8 text-xs font-bold text-content uppercase tracking-wider flex-1">
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> 8–12 Advanced Sensors</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Power Malfunction Alerts</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Preventive Tech Logs</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Setup Fee: ₹10k - ₹15k</li>
               </ul>
-              <Link to="/login"><Button className="w-full bg-[#2C46EA] hover:bg-[#2C46EA]/90 text-xs uppercase tracking-widest font-bold">Deploy Hardware</Button></Link>
+              <Link to="/login">
+                <Button className="w-full bg-[#2C46EA] hover:bg-[#2C46EA]/90 text-xs uppercase tracking-widest font-bold">Deploy Hardware</Button>
+              </Link>
             </div>
-            
-            {/* Tier 1: Advanced Pharma */}
+
+            {/* Tier 1: Pharma */}
             <div className="flex flex-col border border-surface bg-surface/30 rounded-lg p-8 hover:border-content-muted/30 transition-colors">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-content uppercase tracking-wider">Pharma Grade</h3>
                 <span className="text-[10px] font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted">Tier 1</span>
               </div>
               <p className="text-sm font-medium text-content-muted mb-6 h-10">Compliance-grade pharmaceutical & mass dairy production.</p>
-              <div className="mb-6"><span className="text-4xl font-bold tracking-tight">Custom</span></div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold tracking-tight">Custom</span>
+              </div>
               <ul className="space-y-4 mb-8 text-xs font-semibold text-content-muted uppercase tracking-wider flex-1">
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 15–25+ Node Arrays</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> PT100 RTD High Precision</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 100% Failover Redundancy</li>
                 <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Included Service AMC</li>
               </ul>
-              <Link to="/login"><Button variant="outline" className="w-full border-surface text-xs uppercase tracking-widest font-bold">Request Audit</Button></Link>
+              <Link to="/login">
+                <Button variant="outline" className="w-full border-surface text-xs uppercase tracking-widest font-bold">Request Audit</Button>
+              </Link>
             </div>
+
           </div>
         </div>
       </section>

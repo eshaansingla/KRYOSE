@@ -50,4 +50,22 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
+
+  /* Respect OS dark mode preference */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --app-background: #0B1220;
+      --app-surface: #111827;
+      --app-text-primary: #E5E7EB;
+      --app-text-secondary: #9CA3AF;
+      --app-success: #22C55E;
+      --app-error: #EF4444;
+    }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--app-surface); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--app-text-secondary); }
 }
