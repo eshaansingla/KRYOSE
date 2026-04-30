@@ -91,7 +91,7 @@ export function Dashboard() {
       {
         id: `ALT-${Math.floor(10000 + Math.random() * 9000)}`,
         zone: 'Zone B', severity: 'error',
-        message: 'CRITICAL: Compressor Power Failure. Active warming detected.',
+        message: 'CRITICAL: Compressor power fault. Active warming detected above tier threshold.',
         time: 'Just now', timestamp: new Date(), status: 'active',
       },
       ...prev,
@@ -156,7 +156,7 @@ export function Dashboard() {
             <Activity className="h-5 w-5 text-[#2C46EA] shrink-0" />
             <div>
               <h3 className="font-semibold text-content leading-tight text-sm">Demo Mode — Live Simulation</h3>
-              <p className="text-xs text-content-muted">Walk through: Problem → Detection → Action → ROI</p>
+              <p className="text-xs text-content-muted">Walk through: power fault to detection to dispatch to resolved loss prevention.</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -204,7 +204,7 @@ export function Dashboard() {
           </h1>
           <p className="text-sm text-content-muted mt-1 flex items-center gap-2">
             <RefreshCw className={cn('h-3 w-3', syncTime === 0 && 'animate-spin')} />
-            Last synced {syncTime}s ago
+            Last synced {syncTime}s ago - {selectedFacility.description}
           </p>
         </div>
         <div className="flex bg-surface p-1 rounded-lg border border-surface">
@@ -222,6 +222,23 @@ export function Dashboard() {
           ))}
         </div>
       </div>
+
+      <Card className="bg-surface/60">
+        <CardContent className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+          <div>
+            <p className="font-bold uppercase tracking-wider text-content-muted mb-1">Reference Stack</p>
+            <p className="font-semibold text-content leading-relaxed">{selectedFacility.stack}</p>
+          </div>
+          <div>
+            <p className="font-bold uppercase tracking-wider text-content-muted mb-1">Threshold Logic</p>
+            <p className="font-semibold text-content leading-relaxed">{selectedFacility.thresholds}</p>
+          </div>
+          <div>
+            <p className="font-bold uppercase tracking-wider text-content-muted mb-1">Always Enforced</p>
+            <p className="font-semibold text-content leading-relaxed">30s SENSOR_OFFLINE, MC-38 on all tiers, ZMPT101B voltage, SCT-013-000 current.</p>
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <div className="xl:col-span-3 space-y-6">
@@ -246,7 +263,7 @@ export function Dashboard() {
                     <IndianRupee className="h-5 w-5" />
                   </div>
                 </div>
-                <p className="text-xs text-content-muted mt-4 font-medium">Mapped to avoided thermal spoilage (10–25% baseline).</p>
+                <p className="text-xs text-content-muted mt-4 font-medium">Mapped to avoided thermal spoilage (10-25% baseline).</p>
               </CardContent>
             </Card>
 
@@ -307,9 +324,10 @@ export function Dashboard() {
                       contentStyle={{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-surface)', borderRadius: '8px' }}
                       labelStyle={{ color: 'var(--app-text-primary)', marginBottom: '4px' }}
                       itemStyle={{ color: 'var(--app-text-primary)' }}
-                      formatter={(v: number) => [`${v}°C`, 'Temperature']}
+                      formatter={v => [`${Number(v).toFixed(1)} C`, 'Temperature']}
                     />
-                    <ReferenceLine y={8} stroke="#EF4444" strokeDasharray="3 3" label={{ position: 'insideTopLeft', value: 'Critical Ceiling (8°C)', fill: '#EF4444', fontSize: 11 }} />
+                    <ReferenceLine y={8} stroke="#E68325" strokeDasharray="3 3" label={{ position: 'insideTopLeft', value: 'Warning ceiling (8 C)', fill: '#E68325', fontSize: 11 }} />
+                    <ReferenceLine y={10} stroke="#EF4444" strokeDasharray="3 3" label={{ position: 'insideTopRight', value: 'Critical (10 C)', fill: '#EF4444', fontSize: 11 }} />
                     <Line
                       type="monotone"
                       dataKey="temperature"

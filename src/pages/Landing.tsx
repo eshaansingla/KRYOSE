@@ -26,7 +26,7 @@ export function Landing() {
                 </span>
               </h1>
               <p className="max-w-xl text-lg text-content-muted mb-10 leading-relaxed font-medium">
-                The cold chain supply loses ₹89,000 Crores annually to inefficiency. We eliminate blind spots with PT100 RTD sensor networks and proactive AMC dispatches, securing a 6–12 month direct ROI.
+                KRYOSE detects cold-room failures before product loss: equipment faults, power outages, temperature fluctuation, and monitoring gaps. The stack is tiered by regulatory risk, not by generic cost packaging.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/dashboard">
@@ -82,7 +82,7 @@ export function Landing() {
             {[
               { value: '10–25%', label: 'Spoilage Reduction',   color: 'text-content' },
               { value: '< 5 mins', label: 'Alert Execution',    color: 'text-[#E68325]' },
-              { value: '8–14 mo', label: 'Unit Payback Period', color: 'text-[#2C46EA]' },
+              { value: '160-180', label: 'Sensors Across 20 Sites', color: 'text-[#2C46EA]' },
               { value: '1–2 Day', label: 'Deployment Timeline', color: 'text-content' },
             ].map(stat => (
               <div key={stat.label} className="flex flex-col text-center pt-4 md:pt-0">
@@ -110,16 +110,16 @@ export function Landing() {
               {
                 icon: Thermometer,
                 color: '#2C46EA',
-                name: 'PT100 RTD Sensor',
-                badge: 'Pharma Grade',
+                name: 'PT100 + MAX31865',
+                badge: 'Tier 1 Pharma',
                 specs: [
-                  'Range: −200°C to +850°C',
-                  'Accuracy: ±0.1°C',
-                  'Response time: 2.5s',
-                  'IP67 rated housing',
-                  '4-wire Wheatstone bridge',
+                  'Class B: +/-0.32 C at 4 C',
+                  '3-wire SS304 industrial probe',
+                  'SPI via MAX31865',
+                  'Redundant PT100 in critical zones',
+                  'Open/short fault register',
                 ],
-                useCase: 'Pharmaceutical cold rooms, vaccine storage, precision dairy operations requiring regulatory compliance.',
+                useCase: 'WHO GDP pharma rooms requiring traceable, redundant temperature evidence.',
               },
               {
                 icon: Cpu,
@@ -127,27 +127,27 @@ export function Landing() {
                 name: 'DS18B20 Digital Sensor',
                 badge: 'Standard Tier',
                 specs: [
-                  'Range: −55°C to +125°C',
-                  'Accuracy: ±0.5°C',
-                  '1-Wire protocol (parasitic)',
+                  'Range: -55 C to +125 C',
+                  'Accuracy: +/-0.5 C',
+                  '1-Wire bus with 64-bit ROM ID',
                   'Multiple on single bus',
-                  '9–12 bit resolution',
+                  '85 C reset and CRC fault detection',
                 ],
-                useCase: 'General cold storage, logistics hubs, multi-zone warehouses requiring cost-effective broad coverage.',
+                useCase: 'Tier 2 dairy/frozen and Tier 3 food/agriculture temperature probes.',
               },
               {
                 icon: Droplets,
                 color: '#7060A8',
-                name: 'DHT22 Temp & Humidity',
-                badge: 'Humidity Monitoring',
+                name: 'SHT35 / SHT31 / DHT22',
+                badge: 'Humidity by Tier',
                 specs: [
-                  'Temp range: −40°C to +80°C',
-                  'Humidity: 0–100% RH',
-                  'Humidity accuracy: ±2% RH',
-                  'Dual-output single wire',
-                  '2.5s sampling rate',
+                  'T1 SHT35: +/-1.5% RH',
+                  'T2 SHT31: +/-2% RH',
+                  'T3 DHT22: +/-2-5% RH',
+                  'Capacitive sensing only',
+                  'SHT heater cycle prevents sticking',
                 ],
-                useCase: 'Loading bays, produce storage, and environments requiring simultaneous temperature and humidity surveillance.',
+                useCase: 'Humidity monitoring only; humidity-sensor temperature channels are not used for zone temperature.',
               },
             ].map(hw => (
               <div key={hw.name} className="flex flex-col border border-surface bg-background rounded-xl p-8 hover:border-content-muted/30 transition-colors shadow-sm">
@@ -183,7 +183,7 @@ export function Landing() {
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-content mb-4 tracking-tight">Operational Hardware Subscriptions</h2>
             <p className="text-content-muted text-sm font-medium">
-              Standard unit economics require ₹40k–₹80k per warehouse hardware/installation capital setup. Hardware is available on an upfront sale or leased amortized model depending on compliance ceilings.
+              The prototype mirrors the definitive reference: Tier 1 pharma, Tier 2 dairy/frozen, and Tier 3 food/agriculture with deployed sensors, thresholds, quantities, and categorical rejections kept explicit.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
@@ -194,15 +194,15 @@ export function Landing() {
                 <h3 className="text-lg font-bold text-content uppercase tracking-wider">Pilot Deployment</h3>
                 <span className="text-xs font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted">Tier 3</span>
               </div>
-              <p className="text-sm font-medium text-content-muted mb-6 h-10">4-6 sensors evaluating baseline thermal footprints in single facilities.</p>
+              <p className="text-sm font-medium text-content-muted mb-6 h-10">Basic breach detection for 500-2,000 sq ft food/agriculture rooms.</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold tracking-tight">₹3K–₹5K</span>
-                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span>
+                <span className="text-4xl font-bold tracking-tight">~5</span>
+                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">sensors</span>
               </div>
               <ul className="space-y-4 mb-8 text-xs font-semibold text-content-muted uppercase tracking-wider flex-1">
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Standard DS18B20 / DHT22</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Single-zone tracking</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Setup Fee: ₹5k - ₹8k</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 2x DS18B20 + DHT22</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> MC-38 door state</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> ZMPT101B + SCT-013-000</li>
               </ul>
               <Link to="/login">
                 <Button variant="outline" className="w-full text-xs uppercase tracking-widest font-bold">Initiate Pilot Phase</Button>
@@ -218,16 +218,16 @@ export function Landing() {
                 <h3 className="text-lg font-bold text-content uppercase tracking-wider">Multi-Zone Ops</h3>
                 <span className="text-[10px] font-bold px-2 py-1 bg-surface border border-surface rounded text-content-muted">Tier 2</span>
               </div>
-              <p className="text-sm font-medium text-content-muted mb-6 h-10">Mid-size facilities requiring holistic environmental + power oversight.</p>
+              <p className="text-sm font-medium text-content-muted mb-6 h-10">Dairy/frozen warehouses with zone monitoring and compressor fault detection.</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold tracking-tight">₹6K–₹10K</span>
-                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">/mo</span>
+                <span className="text-4xl font-bold tracking-tight">~10</span>
+                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">sensors</span>
               </div>
               <ul className="space-y-4 mb-8 text-xs font-bold text-content uppercase tracking-wider flex-1">
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> 8–12 Advanced Sensors</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Power Malfunction Alerts</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Preventive Tech Logs</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Setup Fee: ₹10k - ₹15k</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> 4-5x DS18B20 + 2-3x SHT31</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> Single-phase voltage/current</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> SW-420 vibration switch</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#E68325] shrink-0" /> MC-38 for all door leaves</li>
               </ul>
               <Link to="/login">
                 <Button className="w-full bg-[#2C46EA] hover:bg-[#2C46EA]/90 text-xs uppercase tracking-widest font-bold">Deploy Hardware</Button>
@@ -242,13 +242,14 @@ export function Landing() {
               </div>
               <p className="text-sm font-medium text-content-muted mb-6 h-10">Compliance-grade pharmaceutical & mass dairy production.</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold tracking-tight">Custom</span>
+                <span className="text-4xl font-bold tracking-tight">~20</span>
+                <span className="text-xs font-bold text-content-muted uppercase ml-2 tracking-wider">sensors</span>
               </div>
               <ul className="space-y-4 mb-8 text-xs font-semibold text-content-muted uppercase tracking-wider flex-1">
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 15–25+ Node Arrays</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> PT100 RTD High Precision</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 100% Failover Redundancy</li>
-                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Included Service AMC</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> PT100 Class B + redundant PT100</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> Danfoss AKS 32 pressure sensors</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 3-cup airflow + ADXL345 vibration</li>
+                <li className="flex items-center gap-3"><Check className="h-4 w-4 text-[#2C46EA] shrink-0" /> 3-phase ZMPT101B/SCT-013-000</li>
               </ul>
               <Link to="/login">
                 <Button variant="outline" className="w-full border-surface text-xs uppercase tracking-widest font-bold">Request Audit</Button>

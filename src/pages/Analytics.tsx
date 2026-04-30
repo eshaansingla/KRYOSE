@@ -50,7 +50,7 @@ export function Analytics() {
                   <Tooltip
                     cursor={{ fill: 'var(--app-surface)', opacity: 0.5 }}
                     contentStyle={{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-surface)', borderRadius: '8px' }}
-                    formatter={(v: number) => [`${v} kW`, 'Consumption']}
+                    formatter={v => [`${Number(v)} kW`, 'Consumption']}
                   />
                   <Bar dataKey="powerKw" fill="#2C46EA" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -84,7 +84,7 @@ export function Analytics() {
                   <YAxis stroke="var(--app-text-secondary)" fontSize={11} tickLine={false} axisLine={false} domain={[2, 8]} tickFormatter={v => `${v}°C`} />
                   <Tooltip
                     contentStyle={{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-surface)', borderRadius: '8px' }}
-                    formatter={(v: number) => [`${v}°C`, 'Avg Temp']}
+                    formatter={v => [`${Number(v).toFixed(1)} C`, 'Avg Temp']}
                   />
                   <Area type="monotone" dataKey="temp" stroke="#2C46EA" strokeWidth={3} fillOpacity={1} fill="url(#tempGrad)" />
                 </AreaChart>
@@ -112,7 +112,7 @@ export function Analytics() {
                   <YAxis stroke="var(--app-text-secondary)" fontSize={11} tickLine={false} axisLine={false} tickFormatter={v => `₹${(v / 1000).toFixed(0)}k`} />
                   <Tooltip
                     contentStyle={{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-surface)', borderRadius: '8px' }}
-                    formatter={(v: number) => [`₹${v.toLocaleString()}`, '']}
+                    formatter={v => [`Rs ${Number(v).toLocaleString()}`, '']}
                   />
                   <Line type="monotone" dataKey="saved" stroke="#22C55E" strokeWidth={2.5} dot={{ fill: '#22C55E', r: 4 }} name="Capital Saved" />
                   <Line type="monotone" dataKey="loss" stroke="#EF4444" strokeWidth={2.5} dot={{ fill: '#EF4444', r: 4 }} strokeDasharray="4 4" name="Residual Loss" />
@@ -141,7 +141,7 @@ export function Analytics() {
                   <YAxis type="category" dataKey="name" stroke="var(--app-text-secondary)" fontSize={11} tickLine={false} axisLine={false} width={55} />
                   <Tooltip
                     contentStyle={{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-surface)', borderRadius: '8px' }}
-                    formatter={(v: number) => [`${v}%`, 'Compliance']}
+                    formatter={v => [`${Number(v).toFixed(1)}%`, 'Compliance']}
                   />
                   <Bar dataKey="compliance" radius={[0, 4, 4, 0]}>
                     {ZONE_COMPLIANCE_DATA.map((_, i) => (

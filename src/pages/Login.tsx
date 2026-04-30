@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Lock, KeyRound, AlertCircle, Loader2 } from 'lucide-react';
 import { Logo } from '../components/ui/Logo';
